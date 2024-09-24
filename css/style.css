@@ -74,5 +74,25 @@ body {
 .menu-item.active, .menu-item:hover {
     background-color: #ec4a67;
 }
-2e0e4a
-ec4a67
+/* Burger Icon */
+.burger {
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #2d2f36;
+}
+
+.sidebar.collapsed {
+    width: 0;
+    overflow: hidden;
+}
+
+.main-content {
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .main-content {
+    margin-left: 0;
+}
