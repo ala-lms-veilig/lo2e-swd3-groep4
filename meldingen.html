@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meldingen Systeem</title>
+    <link rel="stylesheet" href="/css/melding.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Meldingen Systeem</h1>
+            <button id="add-notification-btn">Melding maken</button>
+        </header>
+        
+        <table class="notification-table">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Beschrijving</th>
+                    <th>Gebruikersnaam</th>
+                    <th>Datum</th>
+                    <th>Bewerken</th>
+                </tr>
+            </thead>
+            <tbody id="notification-body">
+                <!-- Meldingen worden hier dynamisch toegevoegd -->
+            </tbody>
+        </table>
+
+        <!-- Formulier voor het bewerken van meldingen -->
+        <div id="edit-form" style="display: none;">
+            <h2>Bewerk Melding</h2>
+            <form>
+                <label for="edit-naam">Naam:</label>
+                <input type="text" id="edit-naam" required>
+                <br>
+                <label for="edit-beschrijving">Beschrijving:</label>
+                <textarea id="edit-beschrijving" required></textarea>
+                <br>
+                <button type="button" id="save-edit-btn">Opslaan</button>
+                <button type="button" id="cancel-edit-btn">Annuleren</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Template voor een melding -->
+    <template id="notification-template">
+        <tr>
+            <td class="naam"></td>
+            <td class="beschrijving"></td>
+            <td class="gebruikersnaam"></td>
+            <td class="datum"></td>
+            <td><button class="edit-btn">Bewerken</button></td>
+        </tr>
+    </template>
+
+    <script src="/javascript/melding.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2e0e4a;
+    color: white;
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+#add-notification-btn {
+    background-color: #ec4a67;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+#add-notification-btn:hover {
+    background-color: #d13b56;
+}
+
+.notification-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.notification-table th, .notification-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.notification-table th {
+    background-color: #2e0e4a;
+    color: white;
+}
+
+.notification-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+#edit-form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#edit-form h2 {
+    margin-top: 0;
+}
+
+#edit-form input, #edit-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+#save-edit-btn, #cancel-edit-btn {
+    margin-top: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#save-edit-btn {
+    background-color: #2e0e4a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+#cancel-edit-btn {
+    background-color: #ec4a67;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
