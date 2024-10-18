@@ -4,7 +4,7 @@ class NotificationApp {
         this.notificationBody = document.getElementById('notification-body');
         this.template = document.getElementById('notification-template');
         this.editForm = document.getElementById('edit-form');
-        this.currentEditIndex = null;
+        this.currentEditIndex = null; 
         this.loadData();
         this.setupEventListeners();
     }
@@ -20,15 +20,18 @@ class NotificationApp {
     }
 
     renderNotifications() {
-        this.notificationBody.innerHTML = '';
+        this.notificationBody.innerHTML = ''; 
         this.notifications.forEach((notification, index) => {
             const clone = this.template.content.cloneNode(true);
             clone.querySelector('.naam').textContent = notification.naam;
             clone.querySelector('.beschrijving').textContent = notification.beschrijving;
             clone.querySelector('.gebruikersnaam').textContent = notification.gebruikersnaam;
             clone.querySelector('.datum').textContent = notification.datum;
+
+            // Edit button
             const editButton = clone.querySelector('.edit-btn');
             editButton.addEventListener('click', () => this.editNotification(index));
+
             this.notificationBody.appendChild(clone);
         });
     }
@@ -45,16 +48,43 @@ class NotificationApp {
         });
     }
 
-    addNotification() {
+    async addNotification() {
+        const naam = prompt("Voer de naam in voor de melding:");
+        const beschrijving = prompt("Voer de beschrijving in voor de melding:");
+
+        // Validatie van invoer
+        if (!naam || !beschrijving) {
+            alert('Vul alstublieft alle velden in.');
+            return;
+        }
+
         const newNotification = {
-            naam: "Nieuwe Melding",
-            beschrijving: "Dit is een nieuwe melding.",
-            gebruikersnaam: "admin",
+            naam: naam,
+            beschrijving: beschrijving,
+            gebruikersnaam: "admin", // Dit kan ook dynamisch zijn
             datum: new Date().toLocaleDateString()
         };
 
-        this.notifications.push(newNotification);
-        this.renderNotifications();
+        try {
+            const response = await fetch('https://my-json-server.typicode.com/ala-lms-veilig/lo2e-swd3-groep4/meldingen', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newNotification),
+            });
+
+            // Controleer of de response goed is
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            this.notifications.push(data); // Voeg de nieuwe melding toe aan de lokale array
+            this.renderNotifications();
+        } catch (error) {
+            console.error('Error adding notification:', error);
+        }
     }
 
     editNotification(index) {
@@ -65,7 +95,7 @@ class NotificationApp {
         this.editForm.style.display = 'block';
     }
 
-    saveEdit() {
+    async saveEdit() {
         if (this.currentEditIndex !== null) {
             const editedNotification = {
                 naam: document.getElementById('edit-naam').value,
@@ -74,7 +104,13 @@ class NotificationApp {
                 datum: this.notifications[this.currentEditIndex].datum
             };
 
-            this.notifications[this.currentEditIndex] = editedNotification;
+            // Validatie van invoer
+            if (!editedNotification.naam || !editedNotification.beschrijving) {
+                alert('Vul alstublieft alle velden in.');
+                return;
+            }
+
+            this.notifications[this.currentEditIndex] = editedNotification; // Update de lokale array
             this.renderNotifications();
             this.editForm.style.display = 'none';
             this.currentEditIndex = null;
