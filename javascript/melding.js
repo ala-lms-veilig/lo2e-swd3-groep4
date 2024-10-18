@@ -1,56 +1,50 @@
 class NotificationApp {
     constructor() {
-        this.notifications = []; // Opslag voor meldingen
-        this.body = document.getElementById('notification-body'); // Waar de meldingen komen
-        this.template = document.getElementById('notification-template'); // De template voor elke melding
-        this.form = document.getElementById('edit-form'); // Het formulier voor bewerken
-        this.editIndex = null; // Index van de melding die momenteel wordt bewerkt
-        this.loadNotifications();
-        this.setupListeners();
+        this.notifications = [];
+        this.notificationBody = document.getElementById('notification-body');
+        this.template = document.getElementById('notification-template');
+        this.editForm = document.getElementById('edit-form');
+        this.currentEditIndex = null; // Houdt de index bij van de melding die we bewerken
+        this.loadData();
+        this.setupEventListeners();
     }
 
-    // Laadt de meldingen uit het JSON-bestand
-    async loadNotifications() {
+    loadData() {
         try {
-            const response = await fetch('notifications.json');
-            this.notifications = await response.json();
-            this.displayNotifications();
+            const savedNotifications = localStorage.getItem('notifications');
+            this.notifications = savedNotifications ? JSON.parse(savedNotifications) : [];
+            this.renderNotifications();
         } catch (error) {
-            console.error('Error loading notifications:', error);
+            console.error('Error loading notifications from localStorage:', error);
         }
     }
 
-    // Render de meldingen in de HTML
-    displayNotifications() {
-        this.body.innerHTML = ''; // Maak de lijst leeg voor we nieuwe meldingen toevoegen
+    renderNotifications() {
+        this.notificationBody.innerHTML = ''; // Maak de tabel leeg voordat we de meldingen renderen
         this.notifications.forEach((notification, index) => {
             const clone = this.template.content.cloneNode(true);
-            clone.querySelector('.name').textContent = notification.naam;
-            clone.querySelector('.description').textContent = notification.beschrijving;
-            clone.querySelector('.username').textContent = notification.gebruikersnaam;
-            clone.querySelector('.date').textContent = notification.datum;
-
-            // Setup edit button voor elke melding
-            const editBtn = clone.querySelector('.edit-btn');
-            editBtn.addEventListener('click', () => this.editNotification(index));
-            this.body.appendChild(clone);
+            clone.querySelector('.naam').textContent = notification.naam;
+            clone.querySelector('.beschrijving').textContent = notification.beschrijving;
+            clone.querySelector('.gebruikersnaam').textContent = notification.gebruikersnaam;
+            clone.querySelector('.datum').textContent = notification.datum;
+            const editButton = clone.querySelector('.edit-btn');
+            editButton.addEventListener('click', () => this.editNotification(index));
+            this.notificationBody.appendChild(clone);
         });
     }
 
-    // Setup event listeners voor knoppen
-    setupListeners() {
-        document.getElementById('add-btn').addEventListener('click', () => {
+    setupEventListeners() {
+        document.getElementById('add-notification-btn').addEventListener('click', () => {
             this.addNotification();
         });
-        document.getElementById('save-btn').addEventListener('click', () => {
+        document.getElementById('save-edit-btn').addEventListener('click', () => {
             this.saveEdit();
         });
-        document.getElementById('cancel-btn').addEventListener('click', () => {
+        document.getElementById('cancel-edit-btn').addEventListener('click', () => {
             this.cancelEdit();
         });
     }
 
-    // Voeg een nieuwe melding toe
     addNotification() {
         const newNotification = {
             naam: "Nieuwe Melding",
@@ -60,49 +54,57 @@ class NotificationApp {
         };
 
         this.notifications.push(newNotification);
-        this.displayNotifications();
+        this.saveData(); // Sla de data op in localStorage
+        this.renderNotifications();
     }
 
-    // Open het formulier om een melding te bewerken
     editNotification(index) {
-        this.editIndex = index;
+        this.currentEditIndex = index;
         const notification = this.notifications[index];
 
-        // Vul de huidige waarden in het bewerkformulier
-        document.getElementById('edit-name').value = notification.naam;
-        document.getElementById('edit-description').value = notification.beschrijving;
+        // Vul het formulier in met de bestaande data
+        document.getElementById('edit-naam').value = notification.naam;
+        document.getElementById('edit-beschrijving').value = notification.beschrijving;
 
         // Toon het formulier
-        this.form.style.display = 'block';
+        this.editForm.style.display = 'block';
     }
 
-    // Sla de bewerkingen van een melding op
     saveEdit() {
-        if (this.editIndex !== null) {
-            const updatedNotification = {
-                naam: document.getElementById('edit-name').value,
-                beschrijving: document.getElementById('edit-description').value,
-                gebruikersnaam: this.notifications[this.editIndex].gebruikersnaam,
-                datum: this.notifications[this.editIndex].datum
+        if (this.currentEditIndex !== null) {
+            const editedNotification = {
+                naam: document.getElementById('edit-naam').value,
+                beschrijving: document.getElementById('edit-beschrijving').value,
+                gebruikersnaam: this.notifications[this.currentEditIndex].gebruikersnaam,
+                datum: this.notifications[this.currentEditIndex].datum
             };
 
-            this.notifications[this.editIndex] = updatedNotification;
-            this.displayNotifications();
+            // Sla de bewerkte melding op in de array en localStorage, render opnieuw
+            this.notifications[this.currentEditIndex] = editedNotification;
+            this.saveData();
+            this.renderNotifications();
 
-            // Verberg het bewerkformulier
-            this.form.style.display = 'none';
-            this.editIndex = null;
+            // Verberg het formulier
+            this.editForm.style.display = 'none';
+            this.currentEditIndex = null;
         }
     }
 
-    // Annuleer het bewerken van een melding
     cancelEdit() {
-        this.form.style.display = 'none';
-        this.editIndex = null;
+        this.editForm.style.display = 'none';
+        this.currentEditIndex = null;
+    }
+
+    saveData() {
+        try {
+            localStorage.setItem('notifications', JSON.stringify(this.notifications));
+        } catch (error) {
+            console.error('Error saving notifications to localStorage:', error);
+        }
     }
 }
 
-// Start de app wanneer de pagina geladen is
+// Initialiseer de applicatie
 document.addEventListener('DOMContentLoaded', () => {
     new NotificationApp();
 });
