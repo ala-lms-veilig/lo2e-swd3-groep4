@@ -1,0 +1,39 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: #333;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+.navbar1 {
+    justify-content: space-between;
+}
+.navbar1 .nav-center {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+.navbar1 .nav-center a {
+    margin: 0 20px;
+}
+.navbar1 .login {
+    margin-left: auto;
+}
+/* Tweede lege navbar */
+.navbar2 {
+    justify-content: flex-start;
+    background-color: #444;
+}
+.navbar2 img {
+    height: 40px;
+}
