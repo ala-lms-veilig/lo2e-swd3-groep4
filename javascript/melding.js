@@ -8,109 +8,135 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentEditId = null;
     let meldingen = []; // Lokale kopie van meldingen
 
-    // Haal meldingen op en render ze in de tabel
+    // Functie om meldingen op te halen
     async function fetchMeldingen() {
-        try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=10');
-            meldingen = await response.json();
-            renderMeldingen();
-        } catch (error) {
-            console.error('Error bij ophalen van meldingen:', error);
-        }
+        const response = await fetch('https://my-json-server.typicode.com/ala-lms-veilig/lo2e-swd3-groep4/db');
+        const data = await response.json();
+        meldingen = data.meldingen || []; // Assuming 'meldingen' is the key in your JSON
+        renderMeldingen(meldingen);
     }
 
-    // Render meldingen in de tabel
-    function renderMeldingen() {
-        notificationBody.innerHTML = ''; // Maak de tabel leeg
+    // Functie om meldingen te renderen
+    function renderMeldingen(meldingen) {
+        notificationBody.innerHTML = '';
         const template = document.getElementById('notification-template');
 
-        meldingen.forEach(({ id, title, body, userId }) => {
+        meldingen.forEach((melding, index) => {
             const clone = template.content.cloneNode(true);
-            clone.querySelector('.naam').textContent = title;
-            clone.querySelector('.beschrijving').textContent = body;
-            clone.querySelector('.gebruikersnaam').textContent = `gebruiker${userId}`;
-            clone.querySelector('.datum').textContent = '2024-10-18'; // Placeholder datum
+            clone.querySelector('.naam').textContent = melding.naam;
+            clone.querySelector('.beschrijving').textContent = melding.beschrijving;
+            clone.querySelector('.gebruikersnaam').textContent = melding.gebruikersnaam;
+            clone.querySelector('.datum').textContent = melding.datum;
 
             // Bewerken knop
             clone.querySelector('.edit-btn').addEventListener('click', () => {
-                currentEditId = id;
-                editNaam.value = title;
-                editBeschrijving.value = body;
+                currentEditId = index; // Store the index for editing
+                editNaam.value = melding.naam;
+                editBeschrijving.value = melding.beschrijving;
                 editForm.style.display = 'block';
             });
 
             // Verwijder knop
-            clone.querySelector('td:last-child').appendChild(createDeleteButton(id));
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Verwijderen';
+            deleteBtn.addEventListener('click', () => {
+                deleteMelding(melding); // Pass the melding to delete
+            });
+            clone.querySelector('td:last-child').appendChild(deleteBtn);
 
             notificationBody.appendChild(clone);
         });
     }
 
-    // Maak een delete knop aan
-    function createDeleteButton(id) {
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Verwijderen';
-        deleteBtn.addEventListener('click', () => deleteMelding(id));
-        return deleteBtn;
-    }
-
-    // Voeg een melding toe
+    // Functie om een melding toe te voegen
     async function addMelding(naam, beschrijving) {
-        try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-                method: 'POST',
-                body: JSON.stringify({ title: naam, body: beschrijving, userId: 1 }),
-                headers: { 'Content-type': 'application/json; charset=UTF-8' },
-            });
+        const response = await fetch('https://my-json-server.typicode.com/ala-lms-veilig/lo2e-swd3-groep4/meldingen', {
+            method: 'POST',
+            body: JSON.stringify({
+                naam: naam,
+                beschrijving: beschrijving,
+                gebruikersnaam: `gebruiker${meldingen.length + 1}`, // Generate a new username dynamically
+                datum: new Date().toISOString().split('T')[0] // Get today's date in YYYY-MM-DD format
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
 
-            const newMelding = await response.json();
-            meldingen.push(newMelding);
-            renderMeldingen();
-        } catch (error) {
-            console.error('Error bij toevoegen van melding:', error);
+        if (!response.ok) {
+            console.error('Failed to add melding:', response.statusText);
+            return;
         }
+
+        const newMelding = await response.json();
+        meldingen.push(newMelding);
+        renderMeldingen(meldingen);
     }
 
-    // Sla de wijzigingen van een melding op
+    // Functie om een melding op te slaan (bewerken)
     async function saveMelding() {
         const naam = editNaam.value;
         const beschrijving = editBeschrijving.value;
 
-        try {
-            const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${currentEditId}`, {
-                method: 'PUT',
-                body: JSON.stringify({ id: currentEditId, title: naam, body: beschrijving, userId: 1 }),
-                headers: { 'Content-type': 'application/json; charset=UTF-8' },
-            });
+        // Constructing the updated melding object
+        const updatedMelding = {
+            naam: naam,
+            beschrijving: beschrijving,
+            gebruikersnaam: meldingen[currentEditId].gebruikersnaam, // Keep the same username
+            datum: new Date().toISOString().split('T')[0] // Update date to today
+        };
 
-            const updatedMelding = await response.json();
-            meldingen = meldingen.map(m => (m.id === currentEditId ? updatedMelding : m));
+        const response = await fetch(`https://my-json-server.typicode.com/ala-lms-veilig/lo2e-swd3-groep4/meldingen/${meldingen[currentEditId].id}`, {
+            method: 'PUT',
+            body: JSON.stringify(updatedMelding),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
 
-            editForm.style.display = 'none';
-            renderMeldingen();
-        } catch (error) {
-            console.error('Error bij opslaan van melding:', error);
+        if (!response.ok) {
+            console.error('Failed to update melding:', response.statusText);
+            return;
         }
+
+        // Update the local copy
+        meldingen[currentEditId] = updatedMelding;
+
+        editForm.style.display = 'none';
+        renderMeldingen(meldingen);
     }
 
-    // Verwijder een melding
-    async function deleteMelding(id) {
-        try {
-            await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, { method: 'DELETE' });
-            meldingen = meldingen.filter(melding => melding.id !== id);
-            renderMeldingen();
-        } catch (error) {
-            console.error('Error bij verwijderen van melding:', error);
+    // Functie om een melding te verwijderen
+    async function deleteMelding(melding) {
+        const response = await fetch(`https://my-json-server.typicode.com/ala-lms-veilig/lo2e-swd3-groep4/meldingen/${melding.id}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            console.error('Failed to delete melding:', response.statusText);
+            return;
         }
+
+        // Remove the melding from the local copy
+        meldingen = meldingen.filter(m => m.id !== melding.id);
+        renderMeldingen(meldingen);
     }
 
-    // Event Listeners
+    // Event listener voor opslaan
     saveEditBtn.addEventListener('click', saveMelding);
-    cancelEditBtn.addEventListener('click', () => editForm.style.display = 'none');
+
+    // Annuleer bewerken
+    cancelEditBtn.addEventListener('click', () => {
+        editForm.style.display = 'none';
+    });
+
+    // Voeg test-melding toe knop
     document.getElementById('add-notification-btn').addEventListener('click', () => {
         const naam = prompt('Voer de naam van de melding in:');
         const beschrijving = prompt('Voer de beschrijving in:');
-        if (naam && beschrijving) addMelding(naam, beschrijving);
+        if (naam && beschrijving) {
+            addMelding(naam, beschrijving);
+        }
     });
 
     // Initialisatie
