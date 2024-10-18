@@ -17,6 +17,12 @@
                 "beschrijving": "Dit is een beschrijving van melding 2.",
                 "gebruikersnaam": "gebruiker2",
                 "datum": "2024-10-14"
+            },
+            {
+                "naam": "Melding 2",
+                "beschrijving": "Dit is een beschrijving van melding 2.",
+                "gebruikersnaam": "gebruiker2",
+                "datum": "2024-10-14"
             }
         ]
 }

@@ -4,7 +4,7 @@ class NotificationApp {
         this.notificationBody = document.getElementById('notification-body');
         this.template = document.getElementById('notification-template');
         this.editForm = document.getElementById('edit-form');
-        this.currentEditIndex = null; // Track the index of the notification being edited
+        this.currentEditIndex = null;
         this.loadData();
         this.setupEventListeners();
     }
@@ -20,7 +20,7 @@ class NotificationApp {
     }
 
     renderNotifications() {
-        this.notificationBody.innerHTML = ''; // Clear the table before rendering notifications
+        this.notificationBody.innerHTML = '';
         this.notifications.forEach((notification, index) => {
             const clone = this.template.content.cloneNode(true);
             clone.querySelector('.naam').textContent = notification.naam;
@@ -60,12 +60,8 @@ class NotificationApp {
     editNotification(index) {
         this.currentEditIndex = index;
         const notification = this.notifications[index];
-
-        // Fill the form with existing data
         document.getElementById('edit-naam').value = notification.naam;
         document.getElementById('edit-beschrijving').value = notification.beschrijving;
-
-        // Show the form
         this.editForm.style.display = 'block';
     }
 
@@ -78,11 +74,8 @@ class NotificationApp {
                 datum: this.notifications[this.currentEditIndex].datum
             };
 
-            // Save the edited notification in the array and render again
             this.notifications[this.currentEditIndex] = editedNotification;
             this.renderNotifications();
-
-            // Hide the form
             this.editForm.style.display = 'none';
             this.currentEditIndex = null;
         }
