@@ -9,13 +9,13 @@ class NotificationApp {
         this.setupEventListeners();
     }
 
-    async loadData() {
+    loadData() {
         try {
-            const response = await fetch('notifications.json');
-            this.notifications = await response.json();
+            const savedNotifications = localStorage.getItem('notifications');
+            this.notifications = savedNotifications ? JSON.parse(savedNotifications) : [];
             this.renderNotifications();
         } catch (error) {
-            console.error('Error loading JSON data:', error);
+            console.error('Error loading notifications from localStorage:', error);
         }
     }
 
@@ -54,6 +54,7 @@ class NotificationApp {
         };
 
         this.notifications.push(newNotification);
+        this.saveData(); // Sla de data op in localStorage
         this.renderNotifications();
     }
 
@@ -78,8 +79,9 @@ class NotificationApp {
                 datum: this.notifications[this.currentEditIndex].datum
             };
 
-            // Sla de bewerkte melding op in de array en render opnieuw
+            // Sla de bewerkte melding op in de array en localStorage, render opnieuw
             this.notifications[this.currentEditIndex] = editedNotification;
+            this.saveData();
             this.renderNotifications();
 
             // Verberg het formulier
@@ -91,6 +93,14 @@ class NotificationApp {
     cancelEdit() {
         this.editForm.style.display = 'none';
         this.currentEditIndex = null;
+    }
+
+    saveData() {
+        try {
+            localStorage.setItem('notifications', JSON.stringify(this.notifications));
+        } catch (error) {
+            console.error('Error saving notifications to localStorage:', error);
+        }
     }
 }
 
