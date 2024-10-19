@@ -1,19 +1,35 @@
 {
     "meldingen": [
-        [
             {
-                "id": 1,
-                "tekst": "Eerste melding"
+                "naam": "Melding 1",
+                "beschrijving": "Dit is een beschrijving van melding 1.",
+                "gebruikersnaam": "gebruiker1",
+                "datum": "2024-10-15"
             },
             {
-                "id": 2,
-                "tekst": "Tweede melding"
+                "naam": "Melding 2",
+                "beschrijving": "Dit is een beschrijving van melding 2.",
+                "gebruikersnaam": "gebruiker2",
+                "datum": "2024-10-14"
             },
             {
-                "id": 3,
-                "tekst": "Derde melding"
+                "naam": "Melding 2",
+                "beschrijving": "Dit is een beschrijving van melding 2.",
+                "gebruikersnaam": "gebruiker2",
+                "datum": "2024-10-14"
+            },
+            {
+                "naam": "Melding 2",
+                "beschrijving": "Dit is een beschrijving van melding 2.",
+                "gebruikersnaam": "gebruiker2",
+                "datum": "2024-10-14"
             }
-        ]
-        
+            ,
+            {
+                "naam": "Melding 2",
+                "beschrijving": "Dit is een beschrijving van melding 2.",
+                "gebruikersnaam": "gebruiker2",
+                "datum": "2024-10-14"
+            }
         ]
 }
