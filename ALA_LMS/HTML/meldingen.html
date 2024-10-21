@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meldingen Systeem</title>
+    <link rel="stylesheet" href="../Website/CSS/melding.css">
+</head>
+<body>
+    <article class="container">
+        <section class="sidebar">
+            <img src="../IMGS/Schermafbeelding 2024-09-13 131900-Photoroom.png" alt="Dashboard Logo" class="mbo">
+            <article class="sidebar-user">
+                <img src="https://i.pravatar.cc/100" alt="User Picture" class="profile-img">
+                <h3>Adam Johnson</h3>
+                <span>adamjohnson@gmail.com</span>
+            </article>
+            <nav class="menu">
+                <h4>Portaal</h4>
+                <a href="dashboard.html" class="menu-item">Dashboard</a>
+                <a href="Inklokken.html" class="menu-item">Inklokken en uitklokken</a>
+                <a href="locatie.html" class="menu-item">Locaties bekijken</a>
+                <h4>Applications</h4>
+                <a href="meldingen.html" class="menu-item active">Meldingen maken</a>
+                <a href="contact.html" class="menu-item">Contact</a>
+                <br>
+                <a href="Home.html" class="menu-item">Uitloggen</a>
+            </nav>
+        </section>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Meldingen Systeem</h1>
+                <button id="add-notification-btn">Melding maken</button>
+            </header>
+
+            <table class="notification-table">
+                <thead>
+                    <tr>
+                        <th>Naam</th>
+                        <th>Beschrijving</th>
+                        <th>Gebruikersnaam</th>
+                        <th>Datum</th>
+                        <th>Bewerken</th>
+                    </tr>
+                </thead>
+                <tbody id="notification-body">
+                    <!-- Notifications will be dynamically added here -->
+                </tbody>
+            </table>
+
+            <article id="edit-form" style="display: none;">
+                <h2>Bewerk Melding</h2>
+                <form>
+                    <label for="edit-naam">Naam:</label>
+                    <input type="text" id="edit-naam" required>
+                    <br>
+                    <label for="edit-beschrijving">Beschrijving:</label>
+                    <textarea id="edit-beschrijving" required></textarea>
+                    <br>
+                    <button type="button" id="save-edit-btn">Opslaan</button>
+                    <button type="button" id="cancel-edit-btn">Annuleren</button>
+                </form>
+            </article>
+        </main>
+    </article>
+
+    <!-- Template voor een melding -->
+    <template id="notification-template">
+        <tr>
+            <td class="naam"></td>
+            <td class="beschrijving"></td>
+            <td class="gebruikersnaam"></td>
+            <td class="datum"></td>
+            <td><button class="edit-btn">Bewerken</button></td>
+        </tr>
+    </template>
+
+    <script src="../JS/melding.js"></script>
+</body>
+</html>

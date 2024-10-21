@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Website/CSS/contact.css"> 
+</head>
+<body>
+    <header class="container">
+        <section class="sidebar">
+            <img src="../IMGS/Schermafbeelding 2024-09-13 131900-Photoroom.png" alt="Dashboard Logo" class="mbo">
+            <article class="sidebar-user">
+                <img src="https://i.pravatar.cc/100" alt="User Picture" class="profile-img">
+                <h3>Adam Johnson</h3>
+                <span>adamjohnson@gmail.com</span>
+            </article>
+            <nav class="menu">
+                <h4>Portaal</h4>
+                <a href="Dashboard.html" class="menu-item">Dashboard</a>
+                <a href="Inklokken.html" class="menu-item">Inklokken en uitklokken</a>
+                <a href="locatie.html" class="menu-item">Locaties bekijken</a>
+                <h4>Applications</h4>
+                <a href="meldingen.html" class="menu-item">Meldingen maken</a>
+                <a href="#" class="menu-item active">Contact</a>
+                <br>
+                <a href="Home.html" class="menu-item">Uitloggen</a>
+            </nav>
+        </section>
+    </header>
+
+    <article class="container">
+        <!-- Contact Form Section -->
+        <section class="contact-form">
+            <h2>Contact Us</h2>
+            <form action="submit_contact.php" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </article>
+
+    <script src="../JS/script.js"></script>
+</body>
+</html>

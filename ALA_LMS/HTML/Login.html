@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Login & Registration Page</title>
+    <link rel="stylesheet" href="../Website/CSS/Login.css">
+</head>
+<body>
+    <article class="container">
+        <article class="left-section"></article>
+        <article class="right-section">
+            <article class="login-box" id="login-box">
+                <h1>mboRijnland</h1>
+                <form id="login-form">
+                    <label for="username">Aanmelden met je gebruikersnaam</label>
+                    <input type="text" id="username" placeholder="jjansen@mborijnland.nl of 123456@mborijnland.nl" required>
+                    
+                    <input type="password" id="password" placeholder="Wachtwoord" required>
+                    
+                    <button type="submit">Log in</button>
+                </form>
+                <br>
+                <p><strong>Voorbeeld gebruikersnaam student:</strong> 123456@mborijnland.nl</p>
+                <p><strong>Voorbeeld gebruikersnaam medewerker:</strong> jjansen@mborijnland.nl</p>
+                <p>Je wachtwoord bevat in ieder geval minimaal drie van de volgende categorieën: hoofdletters, kleine letters, cijfers en symbolen en moet minimaal 9 karakters lang zijn.</p>
+                <p><a href="#" id="show-register">Registreren</a></p>
+            </article>
+
+            <article class="register-box" id="register-box" style="display: none;">
+                <h1>Registreren</h1>
+                <form id="registration-form">
+                    <label for="new-username">Kies je gebruikersnaam</label>
+                    <input type="text" id="new-username" placeholder="Voer je gebruikersnaam in" required>
+
+                    <label for="new-email">E-mail</label>
+                    <input type="email" id="new-email" placeholder="Voer je e-mail in" required>
+
+                    <label for="new-password">Kies een wachtwoord</label>
+                    <input type="password" id="new-password" placeholder="Wachtwoord" required>
+
+                    <button type="submit">Registreren</button>
+                </form>
+                <p><a href="#" id="show-login">Terug naar inloggen</a></p>
+            </article>
+        </article>
+    </article>
+
+    <script src="../JS/inloggen.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inklokken en Uitklokken</title>
+    <link rel="stylesheet" href="../Website/CSS/Inklokken.css">
+</head>
+<body>
+    <header class="container">
+        <section class="sidebar">
+            <img src="../IMGS/Schermafbeelding 2024-09-13 131900-Photoroom.png" alt="Dashboard Logo" class="mbo">
+            <article class="sidebar-user">
+                <img src="https://i.pravatar.cc/100" alt="User Picture" class="profile-img">
+                <h3>Adam Johnson</h3>
+                <span>adamjohnson@gmail.com</span>
+            </article>
+            <nav class="menu">
+                <h4>Portaal</h4>
+                <a href="dashboard.html" class="menu-item">Dashboard</a>
+                <a href="Inklokken.html" class="menu-item active">Inklokken en uitklokken</a>
+                <a href="locatie.html" class="menu-item">Locaties bekijken</a>
+                <h4>Applications</h4>
+                <a href="meldingen.html" class="menu-item">Meldingen maken</a>
+                <a href="#" class="menu-item">Contact</a>
+                <br>
+                <a href="Home.html" class="menu-item">Uitloggen</a>
+            </nav>
+        </section>
+    </header>
+
+    <article class="container">
+        <article class="main-content">
+            <article class="form-section">
+                <article class="box">
+                    <h3>Inklokken</h3>
+                    <form id="clockInForm">
+                        <input type="text" id="naam" placeholder="Jouw naam" required>
+                        <label for="toren">Toren</label>
+                        <select id="toren" required>
+                            <option value="A">Toren A</option>
+                            <option value="B">Toren B</option>
+                            <option value="C">Toren C</option>
+                        </select>
+                        <label for="hoogte">Hoogte</label>
+                        <select id="hoogte" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>    
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                        <button type="submit">Inklokken</button>
+                    </form>
+                </article>
+
+                <article class="box">
+                    <h3>Uitklokken</h3>
+                    <form id="clockOutForm">
+                        <input type="text" id="naamUitklokken" placeholder="Jouw naam" required>
+                        <button type="submit">Uitklokken</button>
+                    </form>
+                </article>
+
+                <article class="box clocked-in-section">
+                    <h3>Wie is ingeklokt?</h3>
+                    <ul id="clockedInList">
+                        <!-- Clocked-in users will be displayed here -->
+                    </ul>
+                </article>
+            </article>
+        </article>
+    </article>
+
+    <script src="../JS/inklokken.js"></script>
+</body>
+</html>
