@@ -1,0 +1,55 @@
+{
+    "meldingen": [
+      {
+        "naam": "Melding 1",
+        "beschrijving": "Dit is een beschrijving van melding 1.",
+        "gebruikersnaam": "gebruiker1",
+        "datum": "2024-10-15"
+      },
+      {
+        "naam": "Melding 2",
+        "beschrijving": "Dit is een beschrijving van melding 2.",
+        "gebruikersnaam": "gebruiker2",
+        "datum": "2024-10-14"
+      },
+      {
+        "naam": "Melding 3",
+        "beschrijving": "Dit is een beschrijving van melding 3.",
+        "gebruikersnaam": "gebruiker2",
+        "datum": "2024-10-14"
+      },
+      {
+        "naam": "Melding 4",
+        "beschrijving": "Dit is een beschrijving van melding 4.",
+        "gebruikersnaam": "gebruiker2",
+        "datum": "2024-10-14"
+      },
+      {
+        "naam": "Melding 5",
+        "beschrijving": "Dit is een beschrijving van melding 5.",
+        "gebruikersnaam": "gebruiker2",
+        "datum": "2024-10-14"
+      }
+    ],
+    "cards": [
+      {
+        "title": "Inklokken/Uitklokken",
+        "image": "../IMGS/content-thumbnail2F27_nl_371.webp",
+        "description": "Hier kunt u in- en uitklokken voor uw werk. Houd uw werkuren bij en zorg voor een overzichtelijke registratie van uw werktijden.",
+        "link": "Inklokken.html"
+      },
+      {
+        "title": "Meldingen maken",
+        "image": "../IMGS/images (1).png",
+        "description": "Maak aangepaste meldingen en herinneringen voor belangrijke taken of gebeurtenissen, zodat je altijd op de hoogte blijft.",
+        "link": "../HTML/meldingen.html"
+      },
+      {
+        "title": "Locaties zien",
+        "image": "../IMGS/pngtree-pin-location-icon-with-folded-map-png-image_7581594.png",
+        "description": "Bekijk en beheer de locaties waar je bent ingeklokt. Houd gemakkelijk je werkplekken en bezochte locaties bij.",
+        "link": "locatie.html"
+      }
+    ]
+  }
+  

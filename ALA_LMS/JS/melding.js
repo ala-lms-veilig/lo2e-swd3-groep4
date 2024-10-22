@@ -1,30 +1,61 @@
+let currentEditIndex = null;
+
 async function fetchNotifications() {
     const url = 'https://my-json-server.typicode.com/ala-lms-veilig/lo2e-swd3-groep4/meldingen';
     
     try {
         const response = await fetch(url);
-        console.log('Response status:', response.status);
-
         if (!response.ok) {
             throw new Error('Netwerkfout: ' + response.statusText);
         }
 
         const data = await response.json();
-
-        // Loop door de meldingen en voeg ze direct toe aan de DOM
-        data.forEach(melding => {
-            const template = document.getElementById('notification-template').content.cloneNode(true);
-            template.querySelector('.naam').textContent = melding.naam;
-            template.querySelector('.beschrijving').textContent = melding.beschrijving;
-            template.querySelector('.gebruikersnaam').textContent = melding.gebruikersnaam;
-            template.querySelector('.datum').textContent = melding.datum;
-
-            document.getElementById('notification-body').appendChild(template);
+        data.forEach((melding, index) => {
+            addNotificationToDOM(melding, index);
         });
     } catch (error) {
         console.error('Fout bij het ophalen van meldingen:', error);
     }
 }
 
-// Roep de functie aan om meldingen op te halen
+function addNotificationToDOM(melding, index) {
+    const template = document.getElementById('notification-template').content.cloneNode(true);
+    template.querySelector('.naam').textContent = melding.naam;
+    template.querySelector('.beschrijving').textContent = melding.beschrijving;
+    template.querySelector('.gebruikersnaam').textContent = melding.gebruikersnaam;
+    template.querySelector('.datum').textContent = melding.datum;
+    
+    const editButton = template.querySelector('.edit-btn');
+    editButton.addEventListener('click', () => openEditForm(melding, index));
+    
+    document.getElementById('notification-body').appendChild(template);
+}
+
+function openEditForm(melding, index) {
+    currentEditIndex = index;
+    document.getElementById('edit-naam').value = melding.naam;
+    document.getElementById('edit-beschrijving').value = melding.beschrijving;
+    document.getElementById('edit-form').style.display = 'block';
+}
+
+document.getElementById('save-edit-btn').addEventListener('click', saveEdit);
+document.getElementById('cancel-edit-btn').addEventListener('click', () => {
+    document.getElementById('edit-form').style.display = 'none';
+});
+
+function saveEdit() {
+    const naam = document.getElementById('edit-naam').value;
+    const beschrijving = document.getElementById('edit-beschrijving').value;
+
+    // Here you would typically also send this updated data back to your server
+    // For demonstration, we'll just update the DOM
+    const row = document.querySelector(`#notification-body tr:nth-child(${currentEditIndex + 1})`);
+    row.querySelector('.naam').textContent = naam;
+    row.querySelector('.beschrijving').textContent = beschrijving;
+
+    // Hide the edit form
+    document.getElementById('edit-form').style.display = 'none';
+}
+
+// Call the fetch function to load notifications
 fetchNotifications();
