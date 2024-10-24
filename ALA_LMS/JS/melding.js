@@ -47,15 +47,14 @@ function saveEdit() {
     const naam = document.getElementById('edit-naam').value;
     const beschrijving = document.getElementById('edit-beschrijving').value;
 
-    // Here you would typically also send this updated data back to your server
-    // For demonstration, we'll just update the DOM
+  
     const row = document.querySelector(`#notification-body tr:nth-child(${currentEditIndex + 1})`);
     row.querySelector('.naam').textContent = naam;
     row.querySelector('.beschrijving').textContent = beschrijving;
 
-    // Hide the edit form
+ 
     document.getElementById('edit-form').style.display = 'none';
 }
 
-// Call the fetch function to load notifications
+
 fetchNotifications();
