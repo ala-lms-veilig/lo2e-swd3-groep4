@@ -1,37 +1,42 @@
 {
-    "meldingen": [
-      {
-        "naam": "Melding 1",
-        "beschrijving": "Dit is een beschrijving van melding 1.",
-        "gebruikersnaam": "gebruiker1",
-        "datum": "2024-10-15"
-      },
-      {
-        "naam": "Melding 2",
-        "beschrijving": "Dit is een beschrijving van melding 2.",
-        "gebruikersnaam": "gebruiker2",
-        "datum": "2024-10-14"
-      },
-      {
-        "naam": "Melding 3",
-        "beschrijving": "Dit is een beschrijving van melding 3.",
-        "gebruikersnaam": "gebruiker2",
-        "datum": "2024-10-14"
-      },
-      {
-        "naam": "Melding 4",
-        "beschrijving": "Dit is een beschrijving van melding 4.",
-        "gebruikersnaam": "gebruiker2",
-        "datum": "2024-10-14"
-      },
-      {
-        "naam": "Melding 5",
-        "beschrijving": "Dit is een beschrijving van melding 5.",
-        "gebruikersnaam": "gebruiker2",
-        "datum": "2024-10-14"
-      }
-    ]
-   
-    
+  "meldingen": [
+    {
+      "id": 1,
+      "naam": "Melding 1",
+      "beschrijving": "Dit is een beschrijving van melding 1.",
+      "gebruikersnaam": "gebruiker1",
+      "datum": "2024-10-15"
+    },
+    {
+      "id": 2,
+      "naam": "Melding 2",
+      "beschrijving": "Dit is een beschrijving van melding 2.",
+      "gebruikersnaam": "gebruiker2",
+      "datum": "2024-10-14"
+    },
+    {
+      "id": 3,
+      "naam": "Melding 3",
+      "beschrijving": "Dit is een beschrijving van melding 3.",
+      "gebruikersnaam": "gebruiker2",
+      "datum": "2024-10-14"
+    },
+    {
+      "id": 4,
+      "naam": "Melding 4",
+      "beschrijving": "Dit is een beschrijving van melding 4.",
+      "gebruikersnaam": "gebruiker2",
+      "datum": "2024-10-14"
+    },
+    {
+      "id": 5,
+      "naam": "Melding 5",
+      "beschrijving": "Dit is een beschrijving van melding 5.",
+      "gebruikersnaam": "gebruiker2",
+      "datum": "2024-10-14"
+    }
+  ],
+  "profile": {
+    "name": "Ayoub"
   }
-  
+}
