@@ -1,0 +1,48 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+.container {
+    margin-top: 50px;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.person {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+}
+.person:nth-child(even) {
+    background-color: #f1f1f1;
+}
+.btn-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+/* Custom styles for tower buttons */
+.btn-tower {
+    color: white;
+    background-color: #6c757d; /* Default secondary color */
+    border-color: #6c757d;
+}
+
+.btn-tower:hover, .btn-tower.active {
+    background-color: #007bff; /* Active/hover color */
+    border-color: #007bff;
+}
+
+.btn-all {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-all.active {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
